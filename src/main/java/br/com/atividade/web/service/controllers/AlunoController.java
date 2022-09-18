@@ -37,10 +37,6 @@ public class AlunoController {
     @PutMapping("/atualizar/{rdm}")
     public ResponseEntity<Optional<Aluno>> atualizarAluno (@PathVariable int rdm, @RequestBody Aluno aluno) {
         return new ResponseEntity<>(alunoService.atualizarAluno(rdm, aluno), HttpStatus.OK);
-//        if (alunoService.atualizarAluno(rdm, aluno)) {
-//            return new ResponseEntity<>(alunoService.alunoPorId(rdm), HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<>(alunoService.alunoPorId(rdm), HttpStatus.OK);
     }
 
     @DeleteMapping("/deletar/{rdm}")
