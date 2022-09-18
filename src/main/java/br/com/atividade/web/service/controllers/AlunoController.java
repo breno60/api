@@ -24,7 +24,7 @@ public class AlunoController {
         return new ResponseEntity<List<Aluno>>(alunoService.listarAlunos(), HttpStatus.FOUND);
     }
 
-    @GetMapping("{rdm}")
+    @GetMapping("/{rdm}")
     public ResponseEntity<Optional<Aluno>> alunoPorId (@PathVariable int rdm) {
         return new ResponseEntity<>(alunoService.alunoPorId(rdm), HttpStatus.OK);
     }
@@ -34,12 +34,13 @@ public class AlunoController {
         return new ResponseEntity<>(alunoService.criarAluno(aluno), HttpStatus.CREATED);
     }
 
-    @PutMapping("/atualizar{rdm}")
+    @PutMapping("/atualizar/{rdm}")
     public ResponseEntity<Optional<Aluno>> atualizarAluno (@PathVariable int rdm, @RequestBody Aluno aluno) {
-        if (alunoService.atualizarAluno(rdm, aluno)) {
-            return new ResponseEntity<>(alunoService.alunoPorId(rdm), HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(alunoService.alunoPorId(rdm), HttpStatus.OK);
+        return new ResponseEntity<>(alunoService.atualizarAluno(rdm, aluno), HttpStatus.OK);
+//        if (alunoService.atualizarAluno(rdm, aluno)) {
+//            return new ResponseEntity<>(alunoService.alunoPorId(rdm), HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(alunoService.alunoPorId(rdm), HttpStatus.OK);
     }
 
     @DeleteMapping("/deletar/{rdm}")

@@ -22,7 +22,7 @@ public class UsuarioController {
         return new ResponseEntity<List<Usuario>>(usuarioService.listarUsuarios(), HttpStatus.FOUND);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Usuario>> usuarioPorId (@PathVariable int id) {
         return new ResponseEntity<>(usuarioService.usuarioPorId(id), HttpStatus.OK);
     }
@@ -32,7 +32,7 @@ public class UsuarioController {
         return new ResponseEntity<>(usuarioService.criarUsuario(usuario), HttpStatus.CREATED);
     }
 
-    @PutMapping("/atualizar{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<Optional<Usuario>> atualizarUsuario (@PathVariable int id, @RequestBody Usuario usuario) {
         if (usuarioService.atualizarUsuario(id, usuario)) {
             return new ResponseEntity<>(usuarioService.usuarioPorId(id), HttpStatus.NOT_FOUND);

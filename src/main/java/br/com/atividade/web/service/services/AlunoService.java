@@ -26,18 +26,29 @@ public class AlunoService {
         return alunoRepository.save(aluno);
     }
 
-    public boolean atualizarAluno (int id, Aluno aluno) {
-        Optional<Aluno> alunoEncontrado = this.alunoPorId(id);
-        boolean notFound = true;
-        if (alunoEncontrado.isPresent()) {
-            Aluno alunoAtualizado = alunoEncontrado.get();
+//    public boolean atualizarAluno (int rdm, Aluno aluno) {
+//        Optional<Aluno> alunoEncontrado = this.alunoPorId(rdm);
+//        boolean notFound = true;
+//        if (alunoEncontrado.isPresent()) {
+//            Aluno alunoAtualizado = alunoEncontrado.get();
+//
+//            alunoAtualizado.setNome(aluno.getNome());
+//            alunoAtualizado.setCurso(aluno.getCurso());
+//            notFound = false;
+//        }
+//
+//        return notFound;
+//    }
 
-            alunoAtualizado.setNome(aluno.getNome());
-            alunoAtualizado.setCurso(aluno.getCurso());
-            notFound = false;
-        }
+    public Optional<Aluno> atualizarAluno (int rdm, Aluno alunoAtualizado) {
 
-        return notFound;
+        Optional<Aluno> alunoEncontrado = alunoRepository.findById(rdm);
+        return alunoEncontrado.map(aluno -> {
+            aluno.setNome(alunoAtualizado.getNome());
+            aluno.setCurso(alunoAtualizado.getCurso());
+            return aluno;
+        });
+    
     }
 
     public boolean deletarAluno (int id) {
